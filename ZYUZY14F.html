@@ -1,0 +1,45 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ZYUZY14F</title>
+<meta name="GENERATOR" content="AB4Editor Control" />
+<style type="text/css">
+SPAN {
+font-family: "Courier New";
+font-size: 10pt;
+color: #000000;
+background: #FFFFFF;
+}
+.L0S32 {
+color: #3399FF;
+}
+.L0S33 {
+color: #4DA619;
+}
+.L0S52 {
+color: #0000FF;
+}
+.L0S55 {
+color: #800080;
+}
+.L0S70 {
+color: #808080;
+}
+</style>
+</head>
+<body>
+<span><span class="L0S52">REPORT&nbsp;</span>zddr&nbsp;<span class="L0S52">NO&nbsp;</span><span class="L0S52">STANDARD&nbsp;</span><span class="L0S52">PAGE&nbsp;</span>HEADING&nbsp;<span class="L0S52">LINE-SIZE&nbsp;</span><span class="L0S32">255</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">INCLUDE&nbsp;</span>ZY14FTOP<span class="L0S55">.</span><br>
+<span class="L0S52">INCLUDE&nbsp;</span>ZY14FF01<span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">START-OF-SELECTION</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>select_data<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>process_data<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>display_error<span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">AT&nbsp;</span><span class="L0S52">LINE-SELECTION</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">SET&nbsp;</span><span class="L0S52">PARAMETER&nbsp;</span><span class="L0S52">ID&nbsp;</span><span class="L0S33">'BES'&nbsp;</span><span class="L0S52">FIELD&nbsp;</span>st_error<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">CALL&nbsp;</span><span class="L0S52">TRANSACTION&nbsp;</span><span class="L0S33">'ME23N'&nbsp;&nbsp;</span><span class="L0S52">AND&nbsp;</span><span class="L0S52">SKIP&nbsp;</span><span class="L0S52">FIRST&nbsp;</span><span class="L0S52">SCREEN&nbsp;</span><span class="L0S55">.</span></span>
+</body>

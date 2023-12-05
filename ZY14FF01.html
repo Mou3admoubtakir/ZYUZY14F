@@ -1,0 +1,485 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ZY14FF01</title>
+<meta name="GENERATOR" content="AB4Editor Control" />
+<style type="text/css">
+SPAN {
+font-family: "Courier New";
+font-size: 10pt;
+color: #000000;
+background: #FFFFFF;
+}
+.L0S31 {
+font-style: italic;
+color: #808080;
+}
+.L0S32 {
+color: #3399FF;
+}
+.L0S33 {
+color: #4DA619;
+}
+.L0S52 {
+color: #0000FF;
+}
+.L0S55 {
+color: #800080;
+}
+.L0S70 {
+color: #808080;
+}
+</style>
+</head>
+<body>
+<span><span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;Include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Z_PO_CREATE_FORMS</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">************************************************************************</span><br>
+<span class="L0S31">*&nbsp;Modification&nbsp;ID:&nbsp;DQSK900013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br>
+<span class="L0S31">*&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03/03/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br>
+<span class="L0S31">*&nbsp;Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Augusta&nbsp;Reeves&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br>
+<span class="L0S31">*&nbsp;Description&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Update&nbsp;objects&nbsp;for&nbsp;HANA&nbsp;upgrade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br>
+<span class="L0S31">************************************************************************</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;select_data</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<br>
+<span class="L0S52">FORM&nbsp;</span>select_data&nbsp;<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>gt_ekko<span class="L0S55">.</span><br>
+<br>
+<span class="L0S31">**selection&nbsp;des&nbsp;postes&nbsp;de&nbsp;commande&nbsp;:&nbsp;reprendre&nbsp;les&nbsp;data&nbsp;du&nbsp;fichier&nbsp;lsmw</span><br>
+&nbsp;&nbsp;<span class="L0S52">SELECT&nbsp;</span>ekko<span class="L0S70">~</span>ebeln&nbsp;&nbsp;ekko<span class="L0S70">~</span>bsart<br>
+&nbsp;&nbsp;<span class="L0S52">FROM&nbsp;</span>ekpo<br>
+&nbsp;&nbsp;<span class="L0S52">JOIN&nbsp;</span>ekko<br>
+&nbsp;&nbsp;<span class="L0S52">ON&nbsp;</span>ekko<span class="L0S70">~</span>ebeln&nbsp;<span class="L0S55">=&nbsp;</span>ekpo<span class="L0S70">~</span>ebeln<br>
+&nbsp;&nbsp;<span class="L0S52">INTO&nbsp;</span>CORRESPONDING&nbsp;<span class="L0S52">FIELDS&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_ekko<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHERE&nbsp;</span>ekko<span class="L0S70">~</span>lifnr&nbsp;<span class="L0S52">IN&nbsp;</span>s_lifnr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekko<span class="L0S70">~</span>ebeln&nbsp;<span class="L0S52">IN&nbsp;</span>s_ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekko<span class="L0S70">~</span>bstyp&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'F'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekko<span class="L0S70">~</span>bsart&nbsp;<span class="L0S52">IN&nbsp;</span>s_bsart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekpo<span class="L0S70">~</span>werks&nbsp;<span class="L0S52">IN&nbsp;</span>s_werks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekpo<span class="L0S70">~</span>loekz&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S52">AND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ekpo<span class="L0S70">~</span>elikz&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">''</span><br>
+<span class="L0S52">GROUP&nbsp;</span><span class="L0S52">BY&nbsp;</span>ekko<span class="L0S70">~</span>ebeln&nbsp;ekko<span class="L0S70">~</span>bsart<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">COLLECT&nbsp;</span>st_ekko&nbsp;<span class="L0S52">INTO&nbsp;</span>gt_ekko<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDSELECT</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;select_data</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;process_data</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<br>
+<span class="L0S52">FORM&nbsp;</span>process_data&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">DATA&nbsp;</span><span class="L0S52">lines&nbsp;</span><span class="L0S52">TYPE&nbsp;</span><span class="L0S52">i</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>gt_ekko&nbsp;<span class="L0S52">INTO&nbsp;</span>st_ekko<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>check_po_not_already_created<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CHECK&nbsp;</span>g_subrc&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>get_po_details<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>delete_items_not_to_be_kept<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DESCRIBE&nbsp;</span><span class="L0S52">TABLE&nbsp;</span>it_poitem&nbsp;<span class="L0S52">LINES&nbsp;</span><span class="L0S52">lines</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CHECK&nbsp;</span><span class="L0S52">lines&nbsp;</span>&gt;&nbsp;<span class="L0S32">0</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>create_po<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;process_data</span><br>
+<br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;get_po_details</span><br>
+<span class="L0S31">*&amp;-------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>get_po_details&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">CLEAR&nbsp;</span>st_poheader<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_return<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_poitem<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_poschedule<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_pocond<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_popartner<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;purchaseorder&nbsp;<span class="L0S55">=&nbsp;</span>st_ekko<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">CALL&nbsp;</span><span class="L0S52">FUNCTION&nbsp;</span><span class="L0S33">'BAPI_PO_GETDETAIL1'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">EXPORTING</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;purchaseorder&nbsp;<span class="L0S55">=&nbsp;</span>purchaseorder<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">IMPORTING</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poheader&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>st_poheader<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">TABLES</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S55">=&nbsp;</span>it_return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poitem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_poitem<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poschedule&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_poschedule<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pocond&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_pocond<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;popartner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_popartner<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">EXCEPTIONS</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OTHERS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S55">=&nbsp;</span><span class="L0S32">1</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;get_po_details</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;delete_items_not_to_be_kept</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>delete_items_not_to_be_kept&nbsp;<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_poitem&nbsp;<span class="L0S52">INTO&nbsp;</span>st_poitem<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DATA&nbsp;</span>l_menge&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekbe<span class="L0S70">-</span>menge<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_ekbe<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">SELECT&nbsp;</span>*&nbsp;<span class="L0S52">FROM&nbsp;</span>ekbe&nbsp;<span class="L0S52">INTO&nbsp;</span><span class="L0S52">TABLE&nbsp;</span>it_ekbe<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHERE&nbsp;</span>ebeln&nbsp;<span class="L0S55">=&nbsp;</span>st_ekko<span class="L0S70">-</span>ebeln<br>
+<span class="L0S52">AND&nbsp;</span>ebelp&nbsp;<span class="L0S55">=&nbsp;</span>st_poitem<span class="L0S70">-</span>po_item<br>
+<span class="L0S52">ORDER&nbsp;</span><span class="L0S52">BY&nbsp;</span>PRIMARY&nbsp;<span class="L0S52">KEY</span><span class="L0S55">.&nbsp;</span><span class="L0S31">&quot;&nbsp;DQSK900013&nbsp;+</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CLEAR&nbsp;</span>l_menge<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_ekbe&nbsp;<span class="L0S52">INTO&nbsp;</span>st_ekbe&nbsp;<span class="L0S52">WHERE&nbsp;</span>vgabe&nbsp;<span class="L0S55">=</span><span class="L0S33">'1'</span><span class="L0S55">.&nbsp;</span><span class="L0S31">&quot;uniquement&nbsp;livr&nbsp;entrantes</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CASE&nbsp;</span>st_ekbe<span class="L0S70">-</span>shkzg<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHEN&nbsp;</span><span class="L0S33">'S'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ADD&nbsp;</span>st_ekbe<span class="L0S70">-</span>menge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">TO&nbsp;</span>l_menge<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHEN&nbsp;</span><span class="L0S33">'H'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">SUBTRACT&nbsp;</span>st_ekbe<span class="L0S70">-</span>menge&nbsp;<span class="L0S52">FROM&nbsp;</span>l_menge<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDCASE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>l_menge&nbsp;<span class="L0S52">GE&nbsp;&nbsp;</span>st_poitem<span class="L0S70">-</span>quantity<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S31">&quot;si&nbsp;qté&nbsp;livrée&nbsp;&gt;&nbsp;qté&nbsp;poste,&nbsp;ne&nbsp;pas&nbsp;créer&nbsp;le&nbsp;poste&nbsp;!</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>log_error&nbsp;<span class="L0S52">USING&nbsp;</span><span class="L0S33">'I'&nbsp;</span><span class="L0S33">''&nbsp;</span>st_poitem<span class="L0S70">-</span>po_item&nbsp;<span class="L0S33">'qté&nbsp;livrée&nbsp;&gt;=&nbsp;qté&nbsp;poste'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DELETE&nbsp;</span>it_poitem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHERE&nbsp;</span>po_item&nbsp;<span class="L0S55">=&nbsp;</span>st_poitem<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DELETE&nbsp;</span>it_poschedule&nbsp;&nbsp;<span class="L0S52">WHERE&nbsp;</span>po_item&nbsp;<span class="L0S55">=&nbsp;</span>st_poitem<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DELETE&nbsp;</span>it_pocond&nbsp;<span class="L0S52">WHERE&nbsp;</span>itm_number&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>st_poitem<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ELSEIF&nbsp;</span>l_menge&nbsp;<span class="L0S52">GT&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S31">&quot;si&nbsp;au&nbsp;moins&nbsp;1&nbsp;qté&nbsp;livrée&nbsp;et&nbsp;&lt;&nbsp;qté&nbsp;poste,&nbsp;créer&nbsp;poste&nbsp;avec&nbsp;reste&nbsp;à&nbsp;livrer&nbsp;!</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">SUBTRACT&nbsp;</span>l_menge&nbsp;<span class="L0S52">FROM&nbsp;</span>st_poitem<span class="L0S70">-</span>quantity<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">MODIFY&nbsp;</span>it_poitem&nbsp;<span class="L0S52">FROM&nbsp;</span>st_poitem<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;delete_items_not_to_be_kept</span><br>
+<br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;CREATE_po</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<br>
+<span class="L0S52">FORM&nbsp;</span>create_po&nbsp;<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">CLEAR&nbsp;</span><span class="L0S55">:&nbsp;</span>poheader<span class="L0S55">,&nbsp;</span>poheaderx<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>it_return<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>poitem<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>poitemx<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>poschedule<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>poschedulex<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>pocond<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>pocondx<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>clean&nbsp;<span class="L0S52">TABLES&nbsp;</span>popartner<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>fill_header<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>fill_items<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>fill_conditions<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>fill_schedules<span class="L0S55">.</span><br>
+&nbsp;&nbsp;popartner[]&nbsp;<span class="L0S55">=&nbsp;</span>it_popartner[]<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">CALL&nbsp;</span><span class="L0S52">FUNCTION&nbsp;</span><span class="L0S33">'BAPI_PO_CREATE1'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">EXPORTING</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poheader&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poheader<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poheaderx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poheaderx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no_price_from_po&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">TABLES</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S55">=&nbsp;</span>it_return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poitem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poitem<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poitemx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poitemx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poschedule&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poschedule<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poschedulex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>poschedulex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pocond&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>pocond<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pocondx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>pocondx<span class="L0S55">.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;popartner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;popartner.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>sy<span class="L0S70">-</span>subrc&nbsp;<span class="L0S52">NE&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;<span class="L0S33">'Echec&nbsp;bapi&nbsp;!&nbsp;origine&nbsp;commande&nbsp;:&nbsp;'</span><span class="L0S55">,&nbsp;</span>st_poheader<span class="L0S70">-</span>po_number<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ELSE&nbsp;</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CASE&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHEN&nbsp;</span>p_smllog<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">READ&nbsp;</span><span class="L0S52">TABLE&nbsp;</span>it_return&nbsp;<span class="L0S52">WITH&nbsp;</span><span class="L0S52">KEY&nbsp;</span><span class="L0S52">type&nbsp;</span><span class="L0S55">=&nbsp;</span><span class="L0S33">'E'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>sy<span class="L0S70">-</span>subrc&nbsp;<span class="L0S52">NE&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">READ&nbsp;</span><span class="L0S52">TABLE&nbsp;</span>it_return&nbsp;<span class="L0S52">WITH&nbsp;</span><span class="L0S52">KEY&nbsp;</span><span class="L0S52">type&nbsp;</span><span class="L0S55">=&nbsp;</span><span class="L0S33">'S'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>log_error&nbsp;<span class="L0S52">USING&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">type&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">parameter&nbsp;</span>it_return<span class="L0S70">-</span>row&nbsp;it_return<span class="L0S70">-</span><span class="L0S52">message</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>p_test&nbsp;<span class="L0S52">IS&nbsp;</span><span class="L0S52">INITIAL</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CALL&nbsp;</span><span class="L0S52">FUNCTION&nbsp;</span><span class="L0S33">'BAPI_TRANSACTION_COMMIT'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ELSE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>log_error&nbsp;<span class="L0S52">USING&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">type&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">parameter&nbsp;</span>it_return<span class="L0S70">-</span>row&nbsp;it_return<span class="L0S70">-</span><span class="L0S52">message</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WHEN&nbsp;</span>p_fullog<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_return<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>log_error&nbsp;<span class="L0S52">USING&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">type&nbsp;</span>it_return<span class="L0S70">-</span><span class="L0S52">parameter&nbsp;</span>it_return<span class="L0S70">-</span>row&nbsp;it_return<span class="L0S70">-</span><span class="L0S52">message</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDCASE</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;CREATE_po</span><br>
+<br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;clean</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>clean&nbsp;&nbsp;<span class="L0S52">TABLES&nbsp;</span>p_table<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">CLEAR&nbsp;</span>p_table<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">REFRESH&nbsp;</span>p_table<span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;clean</span><br>
+<br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;display_error</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>display_error&nbsp;<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>p_warn&nbsp;<span class="L0S52">IS&nbsp;</span><span class="L0S52">INITIAL</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DELETE&nbsp;</span>gt_error&nbsp;<span class="L0S52">WHERE&nbsp;</span><span class="L0S52">type&nbsp;</span><span class="L0S55">=&nbsp;</span><span class="L0S33">'W'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>write_report_header<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>p_fullog&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">SORT&nbsp;</span>gt_error&nbsp;<span class="L0S52">BY&nbsp;</span>ebeln&nbsp;ebelp&nbsp;<span class="L0S52">parameter&nbsp;</span><span class="L0S52">type</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ELSE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">SORT&nbsp;</span>gt_error&nbsp;<span class="L0S52">BY&nbsp;</span><span class="L0S52">type&nbsp;</span><span class="L0S52">text&nbsp;</span>bsart&nbsp;ebeln&nbsp;ebelp<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>gt_error&nbsp;<span class="L0S52">INTO&nbsp;</span>st_error<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>p_fullog&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ON&nbsp;</span><span class="L0S52">CHANGE&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_error<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDON</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;st_error<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">HIDE&nbsp;</span>st_error<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;display_error</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;fill_header</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>fill_header&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>comp_code&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>comp_code<span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>doc_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>doc_type&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>vendor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>vendor<span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>purch_org&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>purch_org<span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>pur_group&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>pur_group<span class="L0S55">.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;poheader-our_ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;st_poheader-po_number.</span><br>
+&nbsp;&nbsp;poheader<span class="L0S70">-</span>suppl_plnt&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;</span>st_poheader<span class="L0S70">-</span>suppl_plnt<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>comp_code&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>doc_type&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>vendor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>purch_org&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>pur_group&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;poheaderx-our_ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;'X'.</span><br>
+&nbsp;&nbsp;poheaderx<span class="L0S70">-</span>suppl_plnt&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;fill_header</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;fill_items</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>fill_items&nbsp;<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_poitem<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>po_item&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>material&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>material<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>matl_group&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>matl_group<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>plant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>plant<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>quantity&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>quantity&nbsp;&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>po_unit&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>po_unit<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>net_price&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>net_price<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>price_unit&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>price_unit<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>stge_loc&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>stge_loc<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem<span class="L0S70">-</span>gr_basediv&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">''</span><span class="L0S55">.&nbsp;&nbsp;</span><span class="L0S31">&quot;coche&nbsp;CF&nbsp;sur&nbsp;EM</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>poitem<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>po_item&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>it_poitem<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>material&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>matl_group&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>plant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>quantity&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>po_unit&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>net_price&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>price_unit&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>stge_loc&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx<span class="L0S70">-</span>gr_basediv&nbsp;&nbsp;<span class="L0S55">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>poitemx<span class="L0S55">.</span><br>
+<br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-po_item&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_poitem-po_item.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-material&nbsp;=&nbsp;it_poitem-material.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-ematerial&nbsp;=&nbsp;it_poitem-ematerial.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-plant&nbsp;=&nbsp;it_poitem-plant.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-stge_loc&nbsp;=&nbsp;it_poitem-stge_loc.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-matl_group&nbsp;=&nbsp;it_poitem-matl_group.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-quantity&nbsp;=&nbsp;it_poitem-quantity.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-po_unit&nbsp;=&nbsp;it_poitem-po_unit.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-po_unit_iso&nbsp;=&nbsp;it_poitem-po_unit_iso.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-orderpr_un&nbsp;=&nbsp;it_poitem-orderpr_un.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-orderpr_un_iso&nbsp;=&nbsp;it_poitem-orderpr_un_iso.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-conv_num1&nbsp;=&nbsp;it_poitem-conv_num1.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-conv_den1&nbsp;=&nbsp;it_poitem-conv_den1.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-net_price&nbsp;=&nbsp;it_poitem-net_price.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-price_unit&nbsp;=&nbsp;it_poitem-price_unit.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-gr_ind&nbsp;=&nbsp;it_poitem-gr_ind.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-free_item&nbsp;=&nbsp;it_poitem-free_item.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-plan_del&nbsp;=&nbsp;it_poitem-plan_del.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-net_weight&nbsp;=&nbsp;it_poitem-net_weight.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-weightunit&nbsp;=&nbsp;it_poitem-weightunit.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-weightunit_iso&nbsp;=&nbsp;it_poitem-weightunit_iso.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-incoterms1&nbsp;=&nbsp;it_poitem-incoterms1.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitem-gr_basediv&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;''.&nbsp;&nbsp;&quot;coche&nbsp;CF&nbsp;sur&nbsp;EM</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;poitem.</span><br>
+<span class="L0S31">*</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-po_item&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it_poitem-po_item.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-material&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-ematerial&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-plant&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-stge_loc&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-matl_group&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-quantity&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-po_unit&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-po_unit_iso&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-orderpr_un&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-orderpr_un_iso&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-conv_num1&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-conv_den1&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-net_price&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-price_unit&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-gr_ind&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-free_item&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-plan_del&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-net_weight&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-weightunit&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-weightunit_iso&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-incoterms1&nbsp;=&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;poitemx-gr_basediv&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'X'.</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;APPEND&nbsp;poitemx.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;fill_items</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;fill_conditions</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>fill_conditions&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_pocond<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocond<span class="L0S70">-</span>itm_number&nbsp;<span class="L0S55">=&nbsp;</span>it_pocond<span class="L0S70">-</span>itm_number<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocond<span class="L0S70">-</span>cond_type&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_pocond<span class="L0S70">-</span>cond_type<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocond<span class="L0S70">-</span>cond_value&nbsp;<span class="L0S55">=&nbsp;</span>it_pocond<span class="L0S70">-</span>cond_value<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>pocond<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocondx<span class="L0S70">-</span>itm_number&nbsp;<span class="L0S55">=&nbsp;</span>it_pocond<span class="L0S70">-</span>itm_number<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocondx<span class="L0S70">-</span>cond_type&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocondx<span class="L0S70">-</span>cond_value&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>pocondx<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;fill_conditions</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;fill_schedules</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>fill_schedules&nbsp;<span class="L0S55">.</span><br>
+<span class="L0S31">*pour&nbsp;dates&nbsp;de&nbsp;livraison</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;</span>it_poschedule<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedule<span class="L0S70">-</span>po_item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_poschedule<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedule<span class="L0S70">-</span>delivery_date&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_poschedule<span class="L0S70">-</span>delivery_date<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>poschedule<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedulex<span class="L0S70">-</span>po_item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S55">=&nbsp;</span>it_poschedule<span class="L0S70">-</span>po_item<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedulex<span class="L0S70">-</span>delivery_date&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>poschedulex<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;fill_schedules</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;check_po_not_already_created</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>check_po_not_already_created&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">DATA&nbsp;</span>l_text<span class="L0S55">(</span><span class="L0S32">100</span><span class="L0S55">)</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">CLEAR&nbsp;</span>g_subrc<span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">SELECT&nbsp;</span><span class="L0S52">SINGLE&nbsp;</span>ebeln&nbsp;<span class="L0S52">FROM&nbsp;</span>ekko&nbsp;<span class="L0S52">INTO&nbsp;</span>l_text<br>
+&nbsp;&nbsp;<span class="L0S52">WHERE&nbsp;</span>unsez&nbsp;<span class="L0S55">=&nbsp;</span>st_ekko<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span>sy<span class="L0S70">-</span>subrc&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">CONCATENATE&nbsp;</span><span class="L0S33">'Commande&nbsp;déjà&nbsp;dupliquée&nbsp;dans&nbsp;commande&nbsp;n°&nbsp;'&nbsp;</span>l_text&nbsp;<span class="L0S52">INTO&nbsp;</span>l_text<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">PERFORM&nbsp;</span>log_error&nbsp;<span class="L0S52">USING&nbsp;</span><span class="L0S33">'E'&nbsp;</span><span class="L0S33">''&nbsp;</span><span class="L0S33">''&nbsp;</span>l_text<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;g_subrc&nbsp;<span class="L0S55">=&nbsp;</span><span class="L0S32">4</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;check_po_not_already_created</span><br>
+<br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;write_report_header</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>write_report_header&nbsp;<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span><span class="L0S52">NOT&nbsp;</span>p_test&nbsp;<span class="L0S52">IS&nbsp;</span><span class="L0S52">INITIAL</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;sy<span class="L0S70">-</span>vline&nbsp;<span class="L0S55">,&nbsp;</span><span class="L0S33">'Mode&nbsp;Test'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ELSE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;sy<span class="L0S70">-</span>vline&nbsp;<span class="L0S55">,&nbsp;</span><span class="L0S33">'Mode&nbsp;Création'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S31">*&nbsp;&nbsp;SKIP.</span><br>
+&nbsp;&nbsp;<span class="L0S52">IF&nbsp;</span><span class="L0S52">NOT&nbsp;</span>p_test&nbsp;<span class="L0S52">IS&nbsp;</span><span class="L0S52">INITIAL</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;sy<span class="L0S70">-</span>vline&nbsp;<span class="L0S55">,&nbsp;</span><span class="L0S33">'Critères&nbsp;de&nbsp;sélection'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDIF</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;<span class="L0S33">'Division&nbsp;:'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;&nbsp;</span>s_werks<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;s_werks<span class="L0S70">-</span>low<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">SKIP</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;<span class="L0S33">'Type&nbsp;de&nbsp;commande&nbsp;:'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;&nbsp;</span>s_bsart<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;s_bsart<span class="L0S70">-</span>low<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">SKIP</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;<span class="L0S33">'Fournisseur&nbsp;:'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;&nbsp;</span>s_lifnr<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;s_lifnr<span class="L0S70">-</span>low<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">SKIP</span><span class="L0S55">.</span><br>
+<br>
+&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;<span class="L0S33">'N°&nbsp;commande&nbsp;:'</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">LOOP&nbsp;</span><span class="L0S52">AT&nbsp;&nbsp;</span>s_ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">WRITE&nbsp;</span><span class="L0S55">:</span>/&nbsp;s_ebeln<span class="L0S70">-</span>low<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ENDLOOP</span><span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">ULINE</span><span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;write_report_header</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;error2</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>error2<span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;error2</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;log_error</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">FORM&nbsp;</span>log_error&nbsp;&nbsp;<span class="L0S52">USING&nbsp;&nbsp;&nbsp;&nbsp;</span>p_type&nbsp;p_parameter&nbsp;p_ebelp&nbsp;p_text<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span><span class="L0S52">type&nbsp;</span><span class="L0S55">=&nbsp;&nbsp;</span>p_type<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span>bsart&nbsp;<span class="L0S55">=&nbsp;</span>st_ekko<span class="L0S70">-</span>bsart<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span>ebeln&nbsp;<span class="L0S55">=&nbsp;</span>st_ekko<span class="L0S70">-</span>ebeln<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span>ebelp&nbsp;<span class="L0S55">=&nbsp;</span>p_ebelp<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span><span class="L0S52">parameter&nbsp;</span><span class="L0S55">=&nbsp;</span>p_parameter<span class="L0S55">.</span><br>
+&nbsp;&nbsp;st_error<span class="L0S70">-</span><span class="L0S52">text&nbsp;</span><span class="L0S55">=&nbsp;&nbsp;</span>p_text<span class="L0S55">.</span><br>
+&nbsp;&nbsp;<span class="L0S52">APPEND&nbsp;</span>st_error&nbsp;<span class="L0S52">TO&nbsp;</span>gt_error<span class="L0S55">.</span><br>
+<span class="L0S52">ENDFORM</span><span class="L0S55">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="L0S31">&quot;&nbsp;log_error</span></span>
+</body>

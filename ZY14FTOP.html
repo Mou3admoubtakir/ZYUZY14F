@@ -1,0 +1,127 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ZY14FTOP</title>
+<meta name="GENERATOR" content="AB4Editor Control" />
+<style type="text/css">
+SPAN {
+font-family: "Courier New";
+font-size: 10pt;
+color: #000000;
+background: #FFFFFF;
+}
+.L0S31 {
+font-style: italic;
+color: #808080;
+}
+.L0S32 {
+color: #3399FF;
+}
+.L0S33 {
+color: #4DA619;
+}
+.L0S52 {
+color: #0000FF;
+}
+.L0S55 {
+color: #800080;
+}
+.L0S70 {
+color: #808080;
+}
+</style>
+</head>
+<body>
+<span><span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S31">*&amp;&nbsp;&nbsp;Include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ZDDR_DATA</span><br>
+<span class="L0S31">*&amp;---------------------------------------------------------------------*</span><br>
+<span class="L0S52">TABLES</span><span class="L0S55">:&nbsp;</span>aufk<span class="L0S55">,&nbsp;</span>t006a<span class="L0S55">,&nbsp;</span>ekko<span class="L0S55">,&nbsp;</span>ekpo<span class="L0S55">.</span><br>
+<br>
+<br>
+<span class="L0S31">***********************************************************************</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECTION&nbsp;SCREEN</span><br>
+<span class="L0S31">************************************************************************</span><br>
+<br>
+<span class="L0S52">SELECTION-SCREEN&nbsp;</span><span class="L0S52">BEGIN&nbsp;</span><span class="L0S52">OF&nbsp;</span><span class="L0S52">BLOCK&nbsp;</span>blk1&nbsp;<span class="L0S52">WITH&nbsp;</span><span class="L0S52">FRAME&nbsp;</span><span class="L0S52">TITLE&nbsp;</span><span class="L0S52">text</span><span class="L0S70">-</span><span class="L0S32">001</span><span class="L0S55">.</span><br>
+<span class="L0S52">SELECT-OPTIONS&nbsp;</span><span class="L0S55">:</span><br>
+s_werks&nbsp;<span class="L0S52">FOR&nbsp;</span>ekpo<span class="L0S70">-</span>werks&nbsp;<span class="L0S52">NO&nbsp;</span>INTERVALS<span class="L0S55">,</span><br>
+s_bsart&nbsp;<span class="L0S52">FOR&nbsp;</span>ekko<span class="L0S70">-</span>bsart&nbsp;<span class="L0S52">NO&nbsp;</span>INTERVALS<span class="L0S55">,</span><br>
+s_lifnr&nbsp;<span class="L0S52">FOR&nbsp;</span>ekko<span class="L0S70">-</span>lifnr&nbsp;<span class="L0S52">NO&nbsp;</span>INTERVALS<span class="L0S55">,</span><br>
+s_ebeln&nbsp;<span class="L0S52">FOR&nbsp;</span>ekko<span class="L0S70">-</span>ebeln&nbsp;<span class="L0S52">NO&nbsp;</span>INTERVALS<span class="L0S55">.</span><br>
+<span class="L0S52">SELECTION-SCREEN&nbsp;</span><span class="L0S52">END&nbsp;</span><span class="L0S52">OF&nbsp;</span><span class="L0S52">BLOCK&nbsp;</span>blk1<span class="L0S55">.</span><br>
+<br>
+<br>
+<span class="L0S52">SELECTION-SCREEN&nbsp;</span><span class="L0S52">BEGIN&nbsp;</span><span class="L0S52">OF&nbsp;</span><span class="L0S52">BLOCK&nbsp;</span>b3&nbsp;<span class="L0S52">WITH&nbsp;</span><span class="L0S52">FRAME&nbsp;</span><span class="L0S52">TITLE&nbsp;</span><span class="L0S52">text</span><span class="L0S70">-</span><span class="L0S32">003</span><span class="L0S55">.</span><br>
+<span class="L0S52">PARAMETERS</span><span class="L0S55">:&nbsp;</span>p_smllog&nbsp;<span class="L0S52">TYPE&nbsp;</span>char1&nbsp;<span class="L0S52">RADIOBUTTON&nbsp;</span><span class="L0S52">GROUP&nbsp;</span>lang<span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">PARAMETERS</span><span class="L0S55">:&nbsp;</span>p_fullog&nbsp;<span class="L0S52">TYPE&nbsp;</span>char1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">RADIOBUTTON&nbsp;</span><span class="L0S52">GROUP&nbsp;</span>lang<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">DEFAULT&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+<span class="L0S52">PARAMETERS&nbsp;</span>p_warn&nbsp;<span class="L0S52">as&nbsp;</span><span class="L0S52">CHECKBOX&nbsp;</span><span class="L0S52">DEFAULT&nbsp;</span><span class="L0S33">''</span><span class="L0S55">.</span><br>
+<span class="L0S52">PARAMETERS&nbsp;</span>p_test&nbsp;<span class="L0S52">as&nbsp;</span><span class="L0S52">CHECKBOX&nbsp;</span><span class="L0S52">DEFAULT&nbsp;</span><span class="L0S33">'X'</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">SELECTION-SCREEN&nbsp;</span><span class="L0S52">END&nbsp;</span><span class="L0S52">OF&nbsp;</span><span class="L0S52">BLOCK&nbsp;</span>b3<span class="L0S55">.</span><br>
+<br>
+<br>
+<span class="L0S31">************************************************************************</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BAPI&nbsp;Structures&nbsp;Declaration</span><br>
+<span class="L0S31">************************************************************************</span><br>
+<br>
+<span class="L0S31">*****data&nbsp;pour&nbsp;bapi****</span><br>
+<span class="L0S31">*1/&nbsp;structures&nbsp;et&nbsp;variables</span><br>
+<span class="L0S52">DATA&nbsp;</span><span class="L0S55">:</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_poheader&nbsp;<span class="L0S52">LIKE&nbsp;&nbsp;&nbsp;</span>bapimepoheader<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;purchaseorder&nbsp;<span class="L0S52">LIKE&nbsp;&nbsp;</span>bapimepoheader<span class="L0S70">-</span>po_number<span class="L0S55">,</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;poheader&nbsp;<span class="L0S52">LIKE&nbsp;&nbsp;&nbsp;</span>bapimepoheader<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poheaderx&nbsp;<span class="L0S52">LIKE&nbsp;&nbsp;&nbsp;</span>bapimepoheaderx<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_poitem&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepoitem<span class="L0S55">,</span><br>
+<br>
+<span class="L0S31">*2/tables&nbsp;internes&nbsp;:&nbsp;it*&nbsp;sont&nbsp;used&nbsp;dans&nbsp;le&nbsp;get,&nbsp;les&nbsp;autres&nbsp;dans&nbsp;le&nbsp;create</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_poitem&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepoitem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitem&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepoitem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poitemx&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepoitemx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_poschedule&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimeposchedule&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedule&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimeposchedule&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;poschedulex&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimeposchedulx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_pocond&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepocond&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocond&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepocond&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pocondx&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapimepocondx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_popartner&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapiekkop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;popartner&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapiekkop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">,</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_return&nbsp;<span class="L0S52">LIKE&nbsp;</span>bapiret2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0&nbsp;</span><span class="L0S52">WITH&nbsp;</span><span class="L0S52">HEADER&nbsp;</span><span class="L0S52">LINE</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S31">************************************************************************</span><br>
+<span class="L0S31">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data</span><br>
+<span class="L0S31">************************************************************************</span><br>
+<br>
+<span class="L0S52">DATA&nbsp;</span><span class="L0S55">:&nbsp;&nbsp;</span><span class="L0S52">BEGIN&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_ekko&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekko<span class="L0S70">-</span>ebeln<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bsart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekko<span class="L0S70">-</span>bsart<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">END&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_ekko<span class="L0S55">.</span><br>
+<span class="L0S52">DATA&nbsp;</span>gt_ekko&nbsp;&nbsp;<span class="L0S52">LIKE&nbsp;</span>st_ekko&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">DATA&nbsp;</span><span class="L0S55">:&nbsp;&nbsp;</span><span class="L0S52">BEGIN&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_error&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">type</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dummy<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bsart&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekko<span class="L0S70">-</span>bsart<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dummy1<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebeln&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekko<span class="L0S70">-</span>ebeln<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dummy2<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ebelp&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekpo<span class="L0S70">-</span>ebelp<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dummy3<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">parameter</span><span class="L0S55">(</span><span class="L0S32">15</span><span class="L0S55">)</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dummy4<span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">text</span><span class="L0S55">(</span><span class="L0S32">100</span><span class="L0S55">)</span><span class="L0S55">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="L0S52">END&nbsp;</span><span class="L0S52">OF&nbsp;</span>st_error<span class="L0S55">.</span><br>
+<span class="L0S52">DATA&nbsp;</span>gt_error&nbsp;&nbsp;<span class="L0S52">LIKE&nbsp;</span>st_error&nbsp;<span class="L0S52">OCCURS&nbsp;</span><span class="L0S32">0</span><span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">DATA&nbsp;</span>it_ekbe&nbsp;<span class="L0S52">TYPE&nbsp;</span><span class="L0S52">TABLE&nbsp;</span><span class="L0S52">OF&nbsp;</span>ekbe<span class="L0S55">.</span><br>
+<span class="L0S52">DATA&nbsp;</span>st_ekbe&nbsp;<span class="L0S52">LIKE&nbsp;</span>ekbe<span class="L0S55">.</span><br>
+<br>
+<span class="L0S52">DATA&nbsp;</span>g_subrc<span class="L0S55">.</span></span>
+</body>
